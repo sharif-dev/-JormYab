@@ -15,9 +15,9 @@ public class CrimeDensity implements AddableToMap {
     private double radius;
     private int color;
 
-    public CrimeDensity(Crime crime) {
-        this.longitude = crime.getLongitude();
-        this.latitude = crime.getLatitude();
+    public CrimeDensity() {
+//        this.longitude = crime.getLongitude();
+//        this.latitude = crime.getLatitude();
         /** to calculate appropriate amount of radius for**/
     }
 

@@ -5,7 +5,7 @@ import java.util.Dictionary;
 
 public class CrimeDensityAdaptor {
 
-    private ArrayList<Crime> crimes;
+
     private double[] zoomSteps;  /** in ascending order to represent each step crime color shower and should be assign handy(by us)***/
     Dictionary<Double,ArrayList<AddableToMap>> addableCrimes; /** Double represents zoomstep an ArrayList is corresponding crime colors to show **/
 
@@ -17,14 +17,4 @@ public class CrimeDensityAdaptor {
     }
 
 
-
-
-
-    public ArrayList<Crime> getCrimes() {
-        return crimes;
-    }
-
-    public void setCrimes(ArrayList<Crime> crimes) {
-        this.crimes = crimes;
-    }
 }

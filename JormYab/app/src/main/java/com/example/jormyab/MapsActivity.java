@@ -43,5 +43,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng tehran = new LatLng(35.6892, 51.3890);
         mMap.addMarker(new MarkerOptions().position(tehran).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tehran, (float) 10.0));
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                System.out.println(mMap.getCameraPosition().zoom);
+            }
+        });
+
     }
 }
