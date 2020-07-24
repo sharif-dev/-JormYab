@@ -2,9 +2,9 @@ package com.example.jormyab;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -30,51 +31,39 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity {
-    Button submitButton;
-    EditText mobileNumber;
-    EditText userName;
+public class CodeActivity extends AppCompatActivity {
+    EditText code;
+    Button submit;
+    String codeSubmited;
     String mobile;
-    String name;
+    SharedPreferences setting;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_code);
+        setting = PreferenceManager.getDefaultSharedPreferences(this);
         findViews();
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        mobile = getIntent().getStringExtra("mobile");
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 mobile = mobileNumber.getText().toString().trim();
-                 name = userName.getText().toString();
-                if (name.length()!=0) {
-                    if (mobile.length() != 11) {
-                        Toast.makeText(getApplicationContext(), "your phone number is not in right format", Toast.LENGTH_LONG).show();
-                    } else {
-                        if (!mobile.startsWith("09")) {
-                            Toast.makeText(getApplicationContext(), "your phone number is not in right format", Toast.LENGTH_LONG).show();
-
-                        } else {
-                            //call api
-                            new register_user().execute();
-                        }
-                    }
+                codeSubmited = code.getText().toString().trim();
+                if (codeSubmited.length()!=4){
+                    Toast.makeText(getApplicationContext(),"your code is invalid" , Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"please enter your name",Toast.LENGTH_LONG).show();
+                    new verify_code().execute();
                 }
             }
         });
     }
-    public void  findViews(){
-        submitButton = (Button) findViewById(R.id.submit_button);
-        mobileNumber = (EditText) findViewById(R.id.mobile_number);
-        userName = (EditText) findViewById(R.id.user_name);
-
-
+    void findViews(){
+        code = (EditText) findViewById(R.id.code);
+        submit = (Button) findViewById(R.id.submit_button);
     }
-    public class register_user extends AsyncTask<Void,Void,String>
+    public class verify_code extends AsyncTask<Void,Void,String>
     {
-        ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+        ProgressDialog pd = new ProgressDialog(CodeActivity.this);
         String url = "http://172.20.10.3/connection.php";
         @Override
         protected void onPreExecute() {
@@ -86,10 +75,10 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("command","register_user"));
-            nameValuePairs.add(new BasicNameValuePair("name",name));
+            nameValuePairs.add(new BasicNameValuePair("command","verify_code"));
+            nameValuePairs.add(new BasicNameValuePair("code",codeSubmited));
             nameValuePairs.add(new BasicNameValuePair("mobile",mobile));
-            HttpClient  httpClient = new DefaultHttpClient();
+            HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             try {
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
@@ -99,16 +88,22 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject jo = new JSONObject(response);
                 final String res;
                 res = jo.getString("result");
-                if (res.equals("ok")){
-                    //activation key send
-                    Intent i = new Intent(LoginActivity.this,CodeActivity.class);
-                    i.putExtra("mobile",mobile);
+                if (!res.equals("error")){
+                    SharedPreferences.Editor editor = setting.edit();
+                    editor.putInt("user_id",jo.getInt("user_id"));
+                    editor.commit();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),"login ...",Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                    Intent i = new Intent(CodeActivity.this,MainActivity.class);
                     startActivity(i);
-                    LoginActivity.this.finish();
+                    CodeActivity.this.finish();
                 }
-//                else {
-//                    Toast.makeText(getApplicationContext() , "connection error",Toast.LENGTH_LONG).show();
-//                }
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
