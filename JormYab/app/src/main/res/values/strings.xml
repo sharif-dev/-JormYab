@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">JormYab</string>
+    <string name="hello">خوش آمدید</string>
+    <string name="forgot_password">forgot password</string>
+    <string name="sign_up">sign up</string>
+    <string name="login">login</string>
+    <string name="please_enter_mobile_number">please enter mobile number</string>
+    <string name="mob_hint">09.........</string>
+    <string name="submit">submit</string>
+    <string name="your_name">your name</string>
 </resources>
