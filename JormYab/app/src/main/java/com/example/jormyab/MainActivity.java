@@ -14,10 +14,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setting = PreferenceManager.getDefaultSharedPreferences(this);
-        if (setting.getInt("user_id",0) == 0) {
+        if (true) {
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(i);
             MainActivity.this.finish();
         }
+        else {
+            Intent i = new Intent(MainActivity.this , MapsActivity.class);
+            startActivity(i);
+            MainActivity.this.finish();
+        };
     }
 }
