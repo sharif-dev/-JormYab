@@ -77,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }else if (mMap.getCameraPosition().zoom < 15){
                         command += "3 ";
                     }else {
-                        command += "4 ";
+                        command += "3 ";
                     }
                     command += String.valueOf(center.longitude) + " " + String.valueOf(center.latitude) + "\n";
                     client1.setCommand(command);

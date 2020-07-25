@@ -25,7 +25,7 @@ class Client extends AsyncTask<Void, Void, Void> {
     String command;
     String response;
     GoogleMap mMap;
-    PolygonOptions[] polygonOptions = new PolygonOptions[9];
+    PolygonOptions[] polygonOptions = new PolygonOptions[16];
 
     public GoogleMap getMap() {
         return mMap;
@@ -103,6 +103,7 @@ class Client extends AsyncTask<Void, Void, Void> {
                 }
                 break;
             case "4":
+                System.out.println(response);
                 String[] points = a[1].split(",");
                 for (String point : points) {
                     subs = point.split("c");
