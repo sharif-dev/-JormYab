@@ -1,7 +1,10 @@
 package com.example.jormyab;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentActivity;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -11,10 +14,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolygonOptions;
+
+import java.io.IOException;
+import java.net.Socket;
+import java.util.Formatter;
+import java.util.Scanner;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
+    boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,29 +37,62 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    @Override
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
         LatLng tehran = new LatLng(35.6892, 51.3890);
-        mMap.addMarker(new MarkerOptions().position(tehran).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tehran, (float) 10.0));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tehran, (float) 10));
+
+        final Client client = new Client();
+        client.setCommand("map 1 51.3890 35.6892\n");  /** map depth longitude latitude\n**/
+        client.setMap(mMap);
+        client.execute();
+
+
+
+
+
         mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
-                System.out.println(mMap.getCameraPosition().zoom);
+                flag = true;
             }
         });
 
+        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+            @Override
+            public void onCameraIdle() {
+                if (flag){
+                    mMap.clear();
+                    Client client1 = new Client();
+                    LatLng center = mMap.getCameraPosition().target;
+                    String command = "map ";
+                    if (mMap.getCameraPosition().zoom < 12){
+                        command += "1 ";
+                    }else if (mMap.getCameraPosition().zoom < 13){
+                        command += "2 ";
+
+                    }else if (mMap.getCameraPosition().zoom < 15){
+                        command += "3 ";
+                    }else {
+                        command += "4 ";
+                    }
+                    command += String.valueOf(center.longitude) + " " + String.valueOf(center.latitude) + "\n";
+                    client1.setCommand(command);
+                    client1.setMap(mMap);
+                    client1.execute();
+                }
+                flag = false;
+            }
+        });
+
+
     }
+
+
+
+
+
 }

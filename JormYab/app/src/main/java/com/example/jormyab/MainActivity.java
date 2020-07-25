@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setting = PreferenceManager.getDefaultSharedPreferences(this);
-        if (true) {
+        if (false) {
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(i);
             MainActivity.this.finish();
