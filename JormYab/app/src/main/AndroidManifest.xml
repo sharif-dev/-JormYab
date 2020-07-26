@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDKymeBXNeiFWY5jRUejv6zItpmr2MVyQ0" />
+            android:value="AIzaSyD_64Hhs7ncsQdsLxKCOX7yEvsiqORbnVs" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

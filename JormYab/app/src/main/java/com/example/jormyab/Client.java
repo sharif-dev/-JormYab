@@ -59,7 +59,8 @@ class Client extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            this.socket = new Socket("192.168.43.28", 7800);
+            this.socket = new Socket("192.168.43.28", 7800);  // for phone
+//            this.socket = new Socket("192.168.1.36", 7800);  //for zyxel
             this.formatter = new Formatter(socket.getOutputStream());
             this.scanner = new Scanner(socket.getInputStream());
         } catch (IOException e) {
