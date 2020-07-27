@@ -2,6 +2,8 @@ package com.example.jormyab;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.finish();
         }
         else {
-            Intent i = new Intent(MainActivity.this , MapsActivity.class);
-            startActivity(i);
-            MainActivity.this.finish();
+            ProfileActivity profileActivity = new ProfileActivity();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container , profileActivity).addToBackStack(null).commit();
+
         };
     }
 }

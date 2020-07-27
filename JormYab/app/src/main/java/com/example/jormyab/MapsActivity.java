@@ -44,49 +44,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         LatLng tehran = new LatLng(35.6892, 51.3890);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tehran, (float) 10));
-
-        final Client client = new Client();
-        client.setCommand("map 1 51.3890 35.6892\n");  /** map depth longitude latitude\n**/
-        client.setMap(mMap);
-        client.execute();
-
-
+//
+//        final Client client = new Client();
+//        client.setCommand("map 1 51.3890 35.6892\n");  /** map depth longitude latitude\n**/
+//        client.setMap(mMap);
+//        client.execute();
 
 
 
-        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-                flag = true;
-            }
-        });
 
-        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
-            @Override
-            public void onCameraIdle() {
-                if (flag){
-                    mMap.clear();
-                    Client client1 = new Client();
-                    LatLng center = mMap.getCameraPosition().target;
-                    String command = "map ";
-                    if (mMap.getCameraPosition().zoom < 12){
-                        command += "1 ";
-                    }else if (mMap.getCameraPosition().zoom < 13){
-                        command += "2 ";
 
-                    }else if (mMap.getCameraPosition().zoom < 15){
-                        command += "3 ";
-                    }else {
-                        command += "3 ";
-                    }
-                    command += String.valueOf(center.longitude) + " " + String.valueOf(center.latitude) + "\n";
-                    client1.setCommand(command);
-                    client1.setMap(mMap);
-                    client1.execute();
-                }
-                flag = false;
-            }
-        });
+//        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+//            @Override
+//            public void onCameraMove() {
+//                flag = true;
+//            }
+//        });
+//
+//        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+//            @Override
+//            public void onCameraIdle() {
+//                if (flag){
+//                    mMap.clear();
+//                    Client client1 = new Client();
+//                    LatLng center = mMap.getCameraPosition().target;
+//                    String command = "map ";
+//                    if (mMap.getCameraPosition().zoom < 12){
+//                        command += "1 ";
+//                    }else if (mMap.getCameraPosition().zoom < 13){
+//                        command += "2 ";
+//
+//                    }else if (mMap.getCameraPosition().zoom < 15){
+//                        command += "3 ";
+//                    }else {
+//                        command += "3 ";
+//                    }
+//                    command += String.valueOf(center.longitude) + " " + String.valueOf(center.latitude) + "\n";
+//                    client1.setCommand(command);
+//                    client1.setMap(mMap);
+//                    client1.execute();
+//                }
+//                flag = false;
+//            }
+//        });
 
 
     }
