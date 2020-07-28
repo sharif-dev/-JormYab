@@ -87,7 +87,7 @@ public class SubmitCrimeFragment extends Dialog {
 
         String userIdStr;
         public add_data() {
-             this.url = "http://172.20.10.3/addData.php";
+             this.url = "http://192.168.1.33/addData.php";
             this.sendIdString = String.valueOf(sendId) ;
             this.userIdStr = String.valueOf(setting.getInt("user_id",0));
         }
@@ -111,8 +111,8 @@ public class SubmitCrimeFragment extends Dialog {
             nameValuePairs.add(new BasicNameValuePair("command","add_data"));
             nameValuePairs.add(new BasicNameValuePair("user_id",userIdStr));
             nameValuePairs.add(new BasicNameValuePair("kind",sendIdString));
-            nameValuePairs.add(new BasicNameValuePair("x","0.002"));
-            nameValuePairs.add(new BasicNameValuePair("y","1.0213"));
+            nameValuePairs.add(new BasicNameValuePair("longitude","0.002"));
+            nameValuePairs.add(new BasicNameValuePair("latitude","1.0213"));
 
             HttpClient  httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);

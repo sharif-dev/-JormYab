@@ -1,5 +1,6 @@
 package com.example.jormyab;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -8,11 +9,13 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.UiThread;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -26,6 +29,7 @@ class Client extends AsyncTask<Void, Void, Void> {
     String response;
     GoogleMap mMap;
     PolygonOptions[] polygonOptions = new PolygonOptions[16];
+    ArrayList<CircleOptions> circleOptions = new ArrayList<>();
 
     public GoogleMap getMap() {
         return mMap;
@@ -59,12 +63,14 @@ class Client extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            this.socket = new Socket("192.168.43.28", 7800);  // for phone
-//            this.socket = new Socket("192.168.1.36", 7800);  //for zyxel
+//            this.socket = new Socket("192.168.43.28", 7800);  // for phone
+            this.socket = new Socket("192.168.1.33", 7800);  //for zyxel
             this.formatter = new Formatter(socket.getOutputStream());
             this.scanner = new Scanner(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
+
         }
         formatter.format(command);
         formatter.flush();
@@ -75,17 +81,16 @@ class Client extends AsyncTask<Void, Void, Void> {
         String[] subs;
         String[] v;
         String[] a = response.split("=");
-        System.out.println("!!!!!!!!!!!!" + a[1]);
-        switch (a[0]){
+        switch (a[0]) {
             case "1":
                 subs = a[1].split("c");
                 polygonOptions[0] = new PolygonOptions();
                 v = subs[0].split("-");
-                for (int i = 0 ; i < 4 ; i++){
+                for (int i = 0; i < 4; i++) {
                     polygonOptions[0].add(new LatLng(Double.parseDouble(v[i].split(" ")[1]), Double.parseDouble(v[i].split(" ")[0])));
                 }
                 polygonOptions[0].strokeColor(Color.TRANSPARENT);
-                polygonOptions[0].fillColor(Color.argb((float) 0.5, Color.valueOf(Color.RED).red(), Color.valueOf(Color.RED).green(), Color.valueOf(Color.RED).blue()));
+                polygonOptions[0].fillColor(findColor(subs[1]));
 
                 break;
             case "2":
@@ -95,19 +100,27 @@ class Client extends AsyncTask<Void, Void, Void> {
                     subs = squares[i].split("c");
                     polygonOptions[i] = new PolygonOptions();
                     v = subs[0].split("-");
-                    for (int j = 0 ; j < 4 ; j++){
+                    for (int j = 0; j < 4; j++) {
                         polygonOptions[i].add(new LatLng(Double.parseDouble(v[j].split(" ")[1]), Double.parseDouble(v[j].split(" ")[0])));
                     }
                     polygonOptions[i].strokeColor(Color.BLACK);
-                    polygonOptions[i].fillColor(Color.argb((float) 0.3, Color.valueOf(Color.BLUE).red(), Color.valueOf(Color.BLUE).green(), Color.valueOf(Color.BLUE).blue()));
+                    polygonOptions[i].fillColor(findColor(subs[1]));
 
                 }
                 break;
             case "4":
                 System.out.println(response);
-                String[] points = a[1].split(",");
-                for (String point : points) {
-                    subs = point.split("c");
+                if (a.length > 1) {
+                    String[] points = a[1].split(",");
+                    for (String point : points) {
+                        subs = point.split("c");
+                        CircleOptions circleOption = new CircleOptions();
+                        circleOption.center(new LatLng(Double.parseDouble(subs[0].split(" ")[1]), Double.parseDouble(subs[0].split(" ")[0])));
+                        circleOption.radius(25);
+                        circleOption.fillColor(Color.RED);
+                        circleOption.strokeColor(Color.TRANSPARENT);
+                        circleOptions.add(circleOption);
+                    }
                 }
                 break;
         }
@@ -120,12 +133,44 @@ class Client extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public int findColor(String s){
+        int c = Integer.parseInt(s);
+        int color = 0;
+        switch (c){
+            case 0:
+                color = Color.argb((float) 0.3, 64,170,72);
+                break;
+            case 1:
+                color = Color.argb((float) 0.3, 244,236,47);
+                break;
+            case 2:
+                color = Color.argb((float) 0.3, 248,144,31);
+                break;
+            case  3:
+                color = Color.argb((float) 0.3, 240,86,50);
+                break;
+            case 4:
+                color = Color.argb((float) 0.3, 178,30,60);
+                break;
+            default:
+                color = Color.TRANSPARENT;
+        }
+        return color;
+    }
+
+
+
     @Override
     protected void onPostExecute(Void aVoid) {
         for (int i = 0; i < polygonOptions.length; i++) {
-            if (polygonOptions[i] != null){
+            if (polygonOptions[i] != null) {
                 mMap.addPolygon(polygonOptions[i]);
             }
+        }
+
+        for (int i=0 ; i < circleOptions.size() ; i++){
+            mMap.addCircle(circleOptions.get(i));
         }
 
         super.onPostExecute(aVoid);

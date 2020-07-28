@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText userName;
     String mobile;
     String name;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +45,9 @@ public class LoginActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 mobile = mobileNumber.getText().toString().trim();
-                 name = userName.getText().toString();
-                if (name.length()!=0) {
+                mobile = mobileNumber.getText().toString().trim();
+                name = userName.getText().toString();
+                if (name.length() != 0) {
                     if (mobile.length() != 11) {
                         Toast.makeText(getApplicationContext(), "your phone number is not in right format", Toast.LENGTH_LONG).show();
                     } else {
@@ -58,24 +59,25 @@ public class LoginActivity extends AppCompatActivity {
                             new register_user().execute();
                         }
                     }
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"please enter your name",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "please enter your name", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
-    public void  findViews(){
+
+    public void findViews() {
         submitButton = (Button) findViewById(R.id.submit_button);
         mobileNumber = (EditText) findViewById(R.id.mobile_number);
         userName = (EditText) findViewById(R.id.user_name);
 
 
     }
-    public class register_user extends AsyncTask<Void,Void,String>
-    {
+
+    public class register_user extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(LoginActivity.this);
-        String url = "http://172.20.10.3/connection.php";
+        String url = "http://192.168.1.33/connection.php";
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -86,10 +88,10 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("command","register_user"));
-            nameValuePairs.add(new BasicNameValuePair("name",name));
-            nameValuePairs.add(new BasicNameValuePair("mobile",mobile));
-            HttpClient  httpClient = new DefaultHttpClient();
+            nameValuePairs.add(new BasicNameValuePair("command", "register_user"));
+            nameValuePairs.add(new BasicNameValuePair("name", name));
+            nameValuePairs.add(new BasicNameValuePair("mobile", mobile));
+            HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             try {
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
@@ -99,10 +101,10 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject jo = new JSONObject(response);
                 final String res;
                 res = jo.getString("result");
-                if (res.equals("ok")){
+                if (res.equals("ok")) {
                     //activation key send
-                    Intent i = new Intent(LoginActivity.this,CodeActivity.class);
-                    i.putExtra("mobile",mobile);
+                    Intent i = new Intent(LoginActivity.this, CodeActivity.class);
+                    i.putExtra("mobile", mobile);
                     startActivity(i);
                     LoginActivity.this.finish();
                 }
@@ -112,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
 
                     }
                 });
