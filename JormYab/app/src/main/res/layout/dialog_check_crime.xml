@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_crime"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="32sp"
+        android:layout_margin="5dp"
+        android:textColor="@color/gradEnd"
+
+        />
+    <RadioGroup
+        android:id="@+id/radio_crimes"
+        android:outlineAmbientShadowColor="@color/grey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        >
+        <RadioButton
+            android:id="@+id/motor_robbery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/motor_robbery"/>
+        <RadioButton
+            android:id="@+id/house_robbery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/robbery_from_house"/>
+        <RadioButton
+            android:id="@+id/murdor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/murdor"/>
+        <RadioButton
+            android:id="@+id/other_crimes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/other_crimes_or_violations"/>
+    </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/submit_crime"
+            android:layout_width="176dp"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -22,9 +22,10 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.finish();
         }
         else {
-            ProfileActivity profileActivity = new ProfileActivity();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container , profileActivity).addToBackStack(null).commit();
-
+//            ProfileActivity profileActivity = new ProfileActivity();
+//            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container , profileActivity).addToBackStack(null).commit();
+            SubmitCrimeFragment submitCrimeFragment = new SubmitCrimeFragment(this);
+            submitCrimeFragment.show();
         };
     }
 }

@@ -10,4 +10,9 @@
     <string name="your_name">your name</string>
     <string name="please_enter_code">please enter code</string>
     <string name="name_of_user">mamad</string>
+    <string name="select_crime">select crime that you see</string>
+    <string name="motor_robbery">motor robbery</string>
+    <string name="robbery_from_house">robbery from house</string>
+    <string name="murdor">murdor</string>
+    <string name="other_crimes_or_violations">other crimes or violations</string>
 </resources>
