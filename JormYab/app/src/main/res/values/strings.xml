@@ -17,8 +17,8 @@
     <string name="other_crimes_or_violations">other crimes or violations</string>
     <string name="welcome">welcome</string>
     <string name="log_in">Log in</string>
-    <string name="sign_up_know">don\'t have account? sign up know</string>
-    <string name="login_know">already have an account? login know</string>
+    <string name="sign_up_know">don\'t have account? sign up now</string>
+    <string name="login_know">already have an account? login now</string>
     <string name="last_name">last name</string>
     <string name="first_name">first name</string>
     <string name="gmail">jormyab@gmail.com</string>
