@@ -8,6 +8,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.UiThread;
 
+import com.google.android.gms.common.util.JsonUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -63,8 +64,8 @@ class Client extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-//            this.socket = new Socket("192.168.43.28", 7800);  // for phone
-            this.socket = new Socket("192.168.1.33", 7800);  //for zyxel
+            this.socket = new Socket("192.168.43.28", 7800);  // for phone
+//            this.socket = new Socket("192.168.1.33", 7800);  //for zyxel
             this.formatter = new Formatter(socket.getOutputStream());
             this.scanner = new Scanner(socket.getInputStream());
         } catch (IOException e) {
@@ -135,27 +136,28 @@ class Client extends AsyncTask<Void, Void, Void> {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public int findColor(String s){
+        System.out.println(s);
         int c = Integer.parseInt(s);
         int color = 0;
         switch (c){
             case 0:
-                color = Color.argb((float) 0.3, 64,170,72);
+                color = Color.argb((float) 0.3, Color.valueOf(Color.GREEN).red(), Color.valueOf(Color.GREEN).green(), Color.valueOf(Color.GREEN).blue());
                 break;
             case 1:
-                color = Color.argb((float) 0.3, 244,236,47);
+                color = Color.argb((float) 0.3, Color.valueOf(Color.YELLOW).red(), Color.valueOf(Color.YELLOW).green(), Color.valueOf(Color.YELLOW).blue());
                 break;
             case 2:
-                color = Color.argb((float) 0.3, 248,144,31);
+                color = Color.argb((float) 0.3, Color.valueOf(Color.RED).red(), Color.valueOf(Color.WHITE).green(), Color.valueOf(Color.WHITE).blue());
                 break;
             case  3:
-                color = Color.argb((float) 0.3, 240,86,50);
+                color = Color.argb((float) 0.3, Color.valueOf(Color.RED).red(), Color.valueOf(Color.BLACK).green(), Color.valueOf(Color.BLACK).blue());
                 break;
             case 4:
-                color = Color.argb((float) 0.3, 178,30,60);
+                color = Color.argb((float) 0.5, Color.valueOf(Color.BLACK).red(), Color.valueOf(Color.BLACK).green(), Color.valueOf(Color.BLACK).blue());
                 break;
-            default:
-                color = Color.TRANSPARENT;
+
         }
+
         return color;
     }
 

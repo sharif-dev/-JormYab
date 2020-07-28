@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setting = PreferenceManager.getDefaultSharedPreferences(this);
-        if (false) {
-            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        if (true) {
+            Intent i = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(i);
             MainActivity.this.finish();
         }

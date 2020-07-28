@@ -87,7 +87,7 @@ public class SubmitCrimeFragment extends Dialog {
 
         String userIdStr;
         public add_data() {
-             this.url = "http://192.168.1.33/addData.php";
+             this.url = "http://192.168.43.28/addData.php";
             this.sendIdString = String.valueOf(sendId) ;
             this.userIdStr = String.valueOf(setting.getInt("user_id",0));
         }
@@ -116,8 +116,10 @@ public class SubmitCrimeFragment extends Dialog {
 
             HttpClient  httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
+
             try {
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
+
 
                 HttpResponse httpResponse = httpClient.execute(httpPost);
                 final String response = EntityUtils.toString(httpResponse.getEntity());
