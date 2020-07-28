@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg1"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="0dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/welcome"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/white"
+        android:textSize="44sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_firstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/myEditTextStyle"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="211dp"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_firstName_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_baseline_email_24"
+            android:drawableRight="@drawable/ic_baseline_smartphone_24"
+            android:hint="@string/first_name"
+            tools:layout_editor_absoluteX="0dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_lastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/myEditTextStyle"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="284dp"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_lastName_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_baseline_accessibility_24"
+            android:drawableRight="@drawable/ic_baseline_smartphone_24"
+            android:hint="@string/last_name"
+            tools:layout_editor_absoluteX="0dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/myEditTextStyle"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="353dp"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_email_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_baseline_email_24"
+            android:drawableRight="@drawable/ic_baseline_smartphone_24"
+            android:hint="@string/gmail"
+            tools:layout_editor_absoluteX="0dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/myEditTextStyle"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="431dp"
+
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_mobile_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_baseline_smartphone_24"
+            android:drawableRight="@drawable/ic_baseline_smartphone_24"
+            android:hint="@string/phone_number"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="498dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/sign_up_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+
+        android:background="@drawable/bg_button_white"
+        android:gravity="center"
+        android:text="@string/sign_up"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="487dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/go_to_login_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="80dp"
+        android:text="@string/login_know"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_btn"
+        app:layout_constraintLeft_toLeftOf="@+id/sign_up_btn"
+        app:layout_constraintRight_toRightOf="@+id/sign_up_btn"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="561dp"
+        android:onClick="performAction"
+        android:clickable="true"
+        android:focusable="true" />
+
+
+</LinearLayout>

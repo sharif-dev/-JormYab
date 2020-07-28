@@ -8,10 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -32,51 +35,55 @@ import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     Button submitButton;
-    EditText mobileNumber;
-    EditText userName;
-    String mobile;
+    TextInputEditText mobile;
+    TextView goToSignUp;
+    String mobileStr;
     String name;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login_activity);
         findViews();
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mobile = mobileNumber.getText().toString().trim();
-                name = userName.getText().toString();
-                if (name.length() != 0) {
-                    if (mobile.length() != 11) {
-                        Toast.makeText(getApplicationContext(), "your phone number is not in right format", Toast.LENGTH_LONG).show();
-                    } else {
-                        if (!mobile.startsWith("09")) {
-                            Toast.makeText(getApplicationContext(), "your phone number is not in right format", Toast.LENGTH_LONG).show();
+                if (mobile.getText().toString().length()==0){
+                    Toast.makeText(getApplicationContext(), "mobile must not be empty", Toast.LENGTH_LONG).show();
 
-                        } else {
-                            //call api
-                            new register_user().execute();
-                        }
+                }else {
+                    if (!mobile.getText().toString().startsWith("09")){
+                        Toast.makeText(getApplicationContext(), "mobileh should start with 09", Toast.LENGTH_LONG).show();
+
+                    }else {
+                        //TODO
+                        mobileStr = mobile.getText().toString();
+                        new login().execute();
                     }
-                } else {
-                    Toast.makeText(getApplicationContext(), "please enter your name", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
     }
 
     public void findViews() {
-        submitButton = (Button) findViewById(R.id.submit_button);
-        mobileNumber = (EditText) findViewById(R.id.mobile_number);
-        userName = (EditText) findViewById(R.id.user_name);
+        submitButton = findViewById(R.id.login_btn);
+        mobile = findViewById(R.id.edit_text_mobile_login);
+        goToSignUp = findViewById(R.id.go_to_sign_up_page);
 
 
     }
 
-    public class register_user extends AsyncTask<Void, Void, String> {
+    public void action(View view) {
+        Intent i = new Intent(LoginActivity.this ,SignUpActivity.class);
+        startActivity(i);
+        LoginActivity.this.finish();
+    }
+
+    public class login extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(LoginActivity.this);
-        String url = "http://192.168.1.33/connection.php";
+        String url = "http://172.20.10.3/connection.php";
 
         @Override
         protected void onPreExecute() {
@@ -88,9 +95,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("command", "register_user"));
-            nameValuePairs.add(new BasicNameValuePair("name", name));
-            nameValuePairs.add(new BasicNameValuePair("mobile", mobile));
+            nameValuePairs.add(new BasicNameValuePair("command", "login"));
+            nameValuePairs.add(new BasicNameValuePair("mobile", mobileStr));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             try {
@@ -104,20 +110,28 @@ public class LoginActivity extends AppCompatActivity {
                 if (res.equals("ok")) {
                     //activation key send
                     Intent i = new Intent(LoginActivity.this, CodeActivity.class);
-                    i.putExtra("mobile", mobile);
+                    i.putExtra("mobile", mobileStr);
                     startActivity(i);
                     LoginActivity.this.finish();
+                }
+                if (res.equals("notexist")){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext() , "your phone number isn't exist please login",Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
 //                else {
 //                    Toast.makeText(getApplicationContext() , "connection error",Toast.LENGTH_LONG).show();
 //                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
-
-                    }
-                });
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
+//
+//                    }
+//                });
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (ClientProtocolException e) {

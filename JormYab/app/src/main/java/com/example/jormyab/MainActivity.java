@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setting = PreferenceManager.getDefaultSharedPreferences(this);
         if (true) {
-            Intent i = new Intent(MainActivity.this, MapsActivity.class);
+            Intent i = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity(i);
             MainActivity.this.finish();
         }

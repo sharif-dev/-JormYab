@@ -1,5 +1,6 @@
 package com.example.jormyab;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -147,6 +148,7 @@ public class SubmitCrimeFragment extends Dialog {
             return null;
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
