@@ -11,19 +11,25 @@
         android:orientation="vertical"
         >
         <ImageView
+            android:id="@+id/profile_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-
+            android:clickable="true"
+            android:focusable="true"
             android:background="@drawable/profile"
             android:layout_weight="1"
             tools:ignore="NestedWeights"
             android:contentDescription="TODO" />
         <ImageView
+            android:id="@+id/report_image"
             android:paddingTop="15dp"
+            android:clickable="true"
+            android:focusable="true"
             android:background="@drawable/report"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:contentDescription="@string/todo" />
 
     </LinearLayout>
     <LinearLayout
@@ -32,8 +38,11 @@
         android:layout_weight="1"
         >
         <ImageView
+            android:id="@+id/map_image"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_weight="1"
             android:background="@drawable/map"
             tools:ignore="NestedWeights"
