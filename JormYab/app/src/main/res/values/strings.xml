@@ -23,4 +23,5 @@
     <string name="first_name">first name</string>
     <string name="gmail">jormyab@gmail.com</string>
     <string name="phone_number">09*********</string>
+    <string name="todo">TODO</string>
 </resources>
