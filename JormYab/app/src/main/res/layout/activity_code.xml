@@ -1,27 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg1">
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/please_enter_code"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        />-->
+<!--    <EditText-->
+<!--        android:id="@+id/code"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="_ _ _ _"-->
+<!--        android:maxLength="4"-->
+<!--        />-->
+<!--    <Button-->
+<!--        android:id="@+id/submit_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/submit"-->
+<!--        />-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/please_enter_code"
-        android:layout_marginTop="50dp"
-        />
-    <EditText
-        android:id="@+id/code"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:src="@drawable/header"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="_ _ _ _"
-        android:maxLength="4"
-        />
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/submit"
-        />
+        android:layout_height="0dp"
+        android:background="#3C1865"
+        android:orientation="vertical"
+        android:layout_weight="3">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/please_enter_code"
+            android:layout_marginTop="35dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="34dp"/>
+        <com.raycoarana.codeinputview.CodeInputView
+            android:id="@+id/submit_code"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:underline_color="#EAECEF"
+            android:layout_gravity="center"
+            app:underline_selected_color="#86F309"
+            app:code_text_color="#FBFBFB"
+
+            app:error_color="#77ce9d"
+            android:paddingTop="38dp"
+            app:input_type="numeric"
+            app:length_of_code="4"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

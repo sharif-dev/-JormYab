@@ -14,6 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import com.raycoarana.codeinputview.CodeInputView;
+import com.raycoarana.codeinputview.OnCodeCompleteListener;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -32,8 +35,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class CodeActivity extends AppCompatActivity {
-    EditText code;
+//    EditText code;
     Button submit;
+    CodeInputView code;
+    String codeStr;
+
     String codeSubmited;
     String mobile;
     SharedPreferences setting;
@@ -41,25 +47,38 @@ public class CodeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code);
-        setting = PreferenceManager.getDefaultSharedPreferences(this);
-        findViews();
         mobile = getIntent().getStringExtra("mobile");
-        submit.setOnClickListener(new View.OnClickListener() {
+
+        findViews();
+        code.addOnCompleteListener(new OnCodeCompleteListener() {
             @Override
-            public void onClick(View v) {
-                codeSubmited = code.getText().toString().trim();
-                if (codeSubmited.length()!=4){
-                    Toast.makeText(getApplicationContext(),"your code is invalid" , Toast.LENGTH_LONG).show();
-                }
-                else {
-                    new verify_code().execute();
-                }
+            public void onCompleted(String code) {
+                String codeStr = code.toString();
+
+                new verify_code().execute();
+
             }
         });
+
+
+        setting = PreferenceManager.getDefaultSharedPreferences(this);
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                codeSubmited = code.getText().toString().trim();
+//                if (codeSubmited.length()!=4){
+//                    Toast.makeText(getApplicationContext(),"your code is invalid" , Toast.LENGTH_LONG).show();
+//                }
+//                else {
+//                    new verify_code().execute();
+//                }
+//            }
+//        });
     }
     void findViews(){
-        code = (EditText) findViewById(R.id.code);
-        submit = (Button) findViewById(R.id.submit_button);
+//        code = (EditText) findViewById(R.id.code);
+//        submit = (Button) findViewById(R.id.submit_button);
+        code = findViewById(R.id.submit_code);
     }
     public class verify_code extends AsyncTask<Void,Void,String>
     {
