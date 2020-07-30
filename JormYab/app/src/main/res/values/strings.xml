@@ -30,4 +30,111 @@
         <item>murder</item>
         <item>other crimes or violation</item>
     </string-array>
+    <string-array name="HH">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+    <item>9</item>
+    <item>10</item>
+    <item>11</item>
+    <item>12</item>
+    <item>13</item>
+    <item>14</item>
+    <item>15</item>
+    <item>16</item>
+    <item>17</item>
+    <item>18</item>
+    <item>19</item>
+    <item>20</item>
+    <item>21</item>
+    <item>22</item>
+    <item>23</item>
+    <item>24</item>
+</string-array>
+
+    <string-array name="DD">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+    <string-array name="MM">
+        <item>فروردین</item>
+        <item>اردیبهشت</item>
+        <item>خرداد</item>
+        <item>تیر</item>
+        <item>مرداد</item>
+        <item>شهریور</item>
+        <item>مهر </item>
+        <item>آبان</item>
+        <item>آذر</item>
+        <item>دی</item>
+        <item>بهمن</item>
+        <item>اسفند</item>
+    </string-array>
+    <string-array name="YY">
+        <item>1370</item>
+        <item>1371</item>
+        <item>1372</item>
+        <item>1373</item>
+        <item>1374</item>
+        <item>1375</item>
+        <item>1376</item>
+        <item>1377</item>
+        <item>1378</item>
+        <item>1379</item>
+        <item>1380</item>
+        <item>1381</item>
+        <item>1382</item>
+        <item>1383</item>
+        <item>1384</item>
+        <item>1385</item>
+        <item>1386</item>
+        <item>1387</item>
+        <item>1388</item>
+        <item>1389</item>
+        <item>1390</item>
+        <item>1391</item>
+        <item>1392</item>
+        <item>1393</item>
+        <item>1394</item>
+        <item>1395</item>
+        <item>1396</item>
+        <item>1397</item>
+        <item>1398</item>
+        <item>1399</item>
+        <item>1400</item>
+    </string-array>
 </resources>
