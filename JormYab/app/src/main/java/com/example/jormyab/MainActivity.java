@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        long[] timing = new long[]{500, 500, 500, 200, 500, 500, 500, 500, 500, 200, 500, 500};
-        int[] strength = new int[]{255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0};
+        long[] timing = new long[]{700, 500, 200, 40, 700, 500, 200, 50, 200, 50, 200, 50,200,50,200,50,700,50};
+        int[] strength = new int[]{255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0,255,0,255,0,255,0};
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(VibrationEffect.createWaveform(timing, strength, -1));
 //        Intent i = new Intent(this, AlertDangerService.class);
