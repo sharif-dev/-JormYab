@@ -10,11 +10,15 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import java.util.concurrent.ExecutionException;
@@ -37,6 +41,7 @@ public class AlertDangerService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onLocationChanged(Location location) {
                 String s = String.valueOf(location.getLongitude()) + " " + String.valueOf(location.getLatitude());
@@ -44,6 +49,10 @@ public class AlertDangerService extends Service {
                     boolean response = new Client2().execute(s).get();
                     if (response){
                         Toast.makeText(getBaseContext(),s, Toast.LENGTH_LONG).show();
+                        long[] timing = new long[]{500, 500, 500, 200, 500, 500, 500, 500, 500, 200, 500, 500};
+                        int[] strength = new int[]{255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0};
+                        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(VibrationEffect.createWaveform(timing, strength, -1));
                         //TODO notification
                     }else {
                         Toast.makeText(getBaseContext(),"OK", Toast.LENGTH_LONG).show();
