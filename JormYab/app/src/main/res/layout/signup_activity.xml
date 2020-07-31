@@ -95,6 +95,8 @@
             android:id="@+id/edit_text_mobile_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="11"
             android:drawableEnd="@drawable/ic_baseline_smartphone_24"
             android:drawableRight="@drawable/ic_baseline_smartphone_24"
             android:hint="@string/phone_number"

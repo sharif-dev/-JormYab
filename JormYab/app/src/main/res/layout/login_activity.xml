@@ -32,6 +32,8 @@
             android:id="@+id/edit_text_mobile_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="11"
             tools:layout_editor_absoluteX="0dp"
             android:drawableEnd="@drawable/ic_baseline_smartphone_24"
             tools:layout_editor_absoluteY="498dp"
