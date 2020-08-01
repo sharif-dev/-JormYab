@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/submit_btn1"
+        android:id="@+id/location_btn_crime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -21,6 +21,7 @@
         tools:layout_editor_absoluteY="188dp" />
 
     <TextView
+        android:id="@+id/welcome_crime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -89,7 +90,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout_firstName"
+        android:id="@+id/text_input_layout_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/myEditTextStyle"
@@ -100,7 +101,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/submit_btn"
+        android:id="@+id/submit_btn_crrime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="150dp"
