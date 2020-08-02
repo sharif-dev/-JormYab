@@ -1,6 +1,5 @@
 ## jormyab app
-
-##developers
+#developers
 # hassan zaker
 # ali abbasi
 # alireza daqiq
