@@ -53,7 +53,13 @@ public class SubmitCrime extends Fragment {
     private Spinner year;
     private Spinner crime;
     private TextInputEditText other;
+    private Context thisContext;
     private String otherStr;
+    private String hourStr;
+    private String dayStr;
+    private String monthStr;
+    private String yearStr;
+    private String crimeStr;
     @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -64,14 +70,15 @@ public class SubmitCrime extends Fragment {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        thisContext= container.getContext();
         return inflater.inflate(R.layout.submit_crime, container, false);
 
 
     }
-    /*public class register_user extends AsyncTask<Void,Void,String>
-    {
-        ProgressDialog pd = new ProgressDialog(SignUpActivity.this);
+    public class login extends AsyncTask<Void, Void, String> {
+        ProgressDialog pd = new ProgressDialog(thisContext);
         String url = "http://172.20.10.3/connection.php";
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -82,13 +89,13 @@ public class SubmitCrime extends Fragment {
         @Override
         protected String doInBackground(Void... voids) {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("command","register_user"));
-            nameValuePairs.add(new BasicNameValuePair("name",nameStr));
-            nameValuePairs.add(new BasicNameValuePair("mobile",mobileStr));
-            nameValuePairs.add(new BasicNameValuePair("last_name",lastNameStr));
-            nameValuePairs.add(new BasicNameValuePair("email",emailStr));
-
-
+            nameValuePairs.add(new BasicNameValuePair("command", "Submit_crime"));
+            nameValuePairs.add(new BasicNameValuePair("other", otherStr));
+            nameValuePairs.add(new BasicNameValuePair("hour", hourStr));
+            nameValuePairs.add(new BasicNameValuePair("day", dayStr));
+            nameValuePairs.add(new BasicNameValuePair("month", monthStr));
+            nameValuePairs.add(new BasicNameValuePair("year", yearStr));
+            nameValuePairs.add(new BasicNameValuePair("crime", crimeStr));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             try {
@@ -99,32 +106,31 @@ public class SubmitCrime extends Fragment {
                 JSONObject jo = new JSONObject(response);
                 final String res;
                 res = jo.getString("result");
-                if (res.equals("ok")){
+                if (res.equals("ok")) {
                     //activation key send
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
-
-                        }
-                    });
-                    Intent i = new Intent(SignUpActivity.this,CodeActivity.class);
-                    i.putExtra("mobile",mobileStr);
+                    Intent i = new Intent(thisContext, CodeActivity.class);
+                    i.putExtra("other", otherStr);
                     startActivity(i);
-                    SignUpActivity.this.finish();
+                    getActivity().finish();
                 }
-                if (res.equals("exist")){
-                    runOnUiThread(new Runnable() {
+                if (res.equals("notexist")) {
+                    getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext() , "your phone number is exists in our data base you can login", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "your phone number isn't exist please login", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
 //                else {
 //                    Toast.makeText(getApplicationContext() , "connection error",Toast.LENGTH_LONG).show();
 //                }
-
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
+//
+//                    }
+//                });
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (ClientProtocolException e) {
@@ -136,15 +142,9 @@ public class SubmitCrime extends Fragment {
             }
             return null;
         }
+    }
 
-        @Override
-        protected void onPostExecute(String s) {
-            pd.hide();
-            pd.dismiss();
-            super.onPostExecute(s);
-        }
-    }*/
-    public void findViews(View view) {
+        public void findViews(View view) {
         Log.d("taatat", " i am in find view");
         hour= view.findViewById(R.id.spinner2);
         day = view.findViewById(R.id.spinner3);
