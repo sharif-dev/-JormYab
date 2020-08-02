@@ -1,5 +1,6 @@
 package com.example.jormyab;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -89,6 +90,7 @@ public class CodeActivity extends AppCompatActivity {
             pd.show();
         }
 
+        @SuppressLint("WrongThread")
         @Override
         protected String doInBackground(Void... voids) {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -119,6 +121,18 @@ public class CodeActivity extends AppCompatActivity {
                     Intent i = new Intent(CodeActivity.this,MapsActivity.class);
                     startActivity(i);
                     CodeActivity.this.finish();
+                }
+                else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            code.setError("wrong code try again");
+                            code.clearError();
+                            code.setCode("");
+                            code.setEditable(true);
+
+                        }
+                    });
                 }
 
                 runOnUiThread(new Runnable() {
