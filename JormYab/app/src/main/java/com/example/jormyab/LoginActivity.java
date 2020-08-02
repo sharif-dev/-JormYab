@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public class login extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(LoginActivity.this);
-        String url = "http://172.20.10.3/connection.php";
+        String url = "http://192.168.1.52/connection.php";
 
         @Override
         protected void onPreExecute() {

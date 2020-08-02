@@ -51,8 +51,7 @@ public class CodeActivity extends AppCompatActivity {
         code.addOnCompleteListener(new OnCodeCompleteListener() {
             @Override
             public void onCompleted(String code) {
-                String codeStr = code.toString();
-
+                //                Toast.makeText(getApplicationContext() , codeStr , Toast.LENGTH_LONG).show();
                 new verify_code().execute();
 
             }
@@ -81,10 +80,11 @@ public class CodeActivity extends AppCompatActivity {
     public class verify_code extends AsyncTask<Void,Void,String>
     {
         ProgressDialog pd = new ProgressDialog(CodeActivity.this);
-        String url = "http://192.168.1.33/connection.php";
+        String url = "http://192.168.1.52/connection.php";
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+//            Toast.makeText(getApplicationContext() , code.getCode() , Toast.LENGTH_LONG).show();
             pd.setMessage("please wait ...");
             pd.show();
         }
@@ -93,7 +93,7 @@ public class CodeActivity extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("command","verify_code"));
-            nameValuePairs.add(new BasicNameValuePair("code",codeSubmited));
+            nameValuePairs.add(new BasicNameValuePair("code",code.getCode()));
             nameValuePairs.add(new BasicNameValuePair("mobile",mobile));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
