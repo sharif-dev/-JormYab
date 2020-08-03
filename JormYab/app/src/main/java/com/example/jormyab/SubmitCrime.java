@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -44,7 +46,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SubmitCrime extends Fragment {
+public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelectedListener {
     private Button location;
     private Button submit;
     private TextView welcome;
@@ -67,6 +69,27 @@ public class SubmitCrime extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
+        ArrayAdapter<CharSequence> adaptor= ArrayAdapter.createFromResource(thisContext, R.array.crimes , android.R.layout.simple_spinner_item);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        crime.setAdapter(adaptor);
+        crime.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
+
+
+        ArrayAdapter<CharSequence> adaptor2= ArrayAdapter.createFromResource(thisContext, R.array.YY , android.R.layout.simple_spinner_item);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        year.setAdapter(adaptor2);
+        year.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
+
+        ArrayAdapter<CharSequence> adaptor3= ArrayAdapter.createFromResource(thisContext, R.array.MM , android.R.layout.simple_spinner_item);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        month.setAdapter(adaptor3);
+        month.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
+
+        ArrayAdapter<CharSequence> adaptor4= ArrayAdapter.createFromResource(thisContext, R.array.DD , android.R.layout.simple_spinner_item);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        day.setAdapter(adaptor4);
+        day.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
+        dayStr = day.getSelectedItem().toString();
 
 
     }
@@ -77,6 +100,18 @@ public class SubmitCrime extends Fragment {
 
 
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
     public class login extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(thisContext);
         String url = "http://172.20.10.3/connection.php";
