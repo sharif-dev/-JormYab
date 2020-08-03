@@ -34,7 +34,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class CodeActivity extends AppCompatActivity {
-//    EditText code;
+    //    EditText code;
     Button submit;
     CodeInputView code;
     String codeStr;
@@ -42,6 +42,7 @@ public class CodeActivity extends AppCompatActivity {
     String codeSubmited;
     String mobile;
     SharedPreferences setting;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,6 @@ public class CodeActivity extends AppCompatActivity {
         code.addOnCompleteListener(new OnCodeCompleteListener() {
             @Override
             public void onCompleted(String code) {
-                //                Toast.makeText(getApplicationContext() , codeStr , Toast.LENGTH_LONG).show();
                 new verify_code().execute();
 
             }
@@ -60,28 +60,18 @@ public class CodeActivity extends AppCompatActivity {
 
 
         setting = PreferenceManager.getDefaultSharedPreferences(this);
-//        submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                codeSubmited = code.getText().toString().trim();
-//                if (codeSubmited.length()!=4){
-//                    Toast.makeText(getApplicationContext(),"your code is invalid" , Toast.LENGTH_LONG).show();
-//                }
-//                else {
-//                    new verify_code().execute();
-//                }
-//            }
-//        });
+
     }
-    void findViews(){
-//        code = (EditText) findViewById(R.id.code);
-//        submit = (Button) findViewById(R.id.submit_button);
+
+    void findViews() {
+
         code = findViewById(R.id.submit_code);
     }
-    public class verify_code extends AsyncTask<Void,Void,String>
-    {
+
+    public class verify_code extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(CodeActivity.this);
         String url = "http://192.168.1.53/connection.php";
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -94,9 +84,9 @@ public class CodeActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("command","verify_code"));
-            nameValuePairs.add(new BasicNameValuePair("code",code.getCode()));
-            nameValuePairs.add(new BasicNameValuePair("mobile",mobile));
+            nameValuePairs.add(new BasicNameValuePair("command", "verify_code"));
+            nameValuePairs.add(new BasicNameValuePair("code", code.getCode()));
+            nameValuePairs.add(new BasicNameValuePair("mobile", mobile));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             try {
@@ -107,28 +97,27 @@ public class CodeActivity extends AppCompatActivity {
                 JSONObject jo = new JSONObject(response);
                 final String res;
                 res = jo.getString("result");
-                if (!res.equals("error")){
+                if (!res.equals("error")) {
                     SharedPreferences.Editor editor = setting.edit();
-                    editor.putInt("user_id",jo.getInt("user_id"));
-                    editor.putInt("name",jo.getInt("name"));
+                    editor.putInt("user_id", jo.getInt("user_id"));
+                    editor.putInt("name", jo.getInt("name"));
 
-                    editor.putString("last_name" , jo.getString("last_name"));
-                    editor.putString("email" , jo.getString("email"));
-                    editor.putString("mobile" , mobile);
+                    editor.putString("last_name", jo.getString("last_name"));
+                    editor.putString("email", jo.getString("email"));
+                    editor.putString("mobile", mobile);
 
                     editor.commit();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(),"login ...",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "login ...", Toast.LENGTH_LONG).show();
 
                         }
                     });
-                    Intent i = new Intent(CodeActivity.this,MenuActivity.class);
+                    Intent i = new Intent(CodeActivity.this, MenuActivity.class);
                     startActivity(i);
                     CodeActivity.this.finish();
-                }
-                else {
+                } else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -144,7 +133,7 @@ public class CodeActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
 
                     }
                 });

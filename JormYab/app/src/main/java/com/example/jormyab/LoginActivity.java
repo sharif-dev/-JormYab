@@ -53,14 +53,14 @@ public class LoginActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mobile.getText().toString().length()==0){
+                if (mobile.getText().toString().length() == 0) {
                     Toast.makeText(getApplicationContext(), "mobile must not be empty", Toast.LENGTH_LONG).show();
 
-                }else {
-                    if (!mobile.getText().toString().startsWith("09")){
+                } else {
+                    if (!mobile.getText().toString().startsWith("09")) {
                         Toast.makeText(getApplicationContext(), "mobile should start with 09", Toast.LENGTH_LONG).show();
 
-                    }else {
+                    } else {
                         //TODO
                         mobileStr = mobile.getText().toString();
                         new login().execute();
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void action(View view) {
-        Intent i = new Intent(LoginActivity.this ,SignUpActivity.class);
+        Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(i);
         LoginActivity.this.finish();
     }
@@ -112,29 +112,22 @@ public class LoginActivity extends AppCompatActivity {
                 final String res;
                 res = jo.getString("result");
                 if (res.equals("ok")) {
-                    Log.d("checkerOfString" , jo.getString("name") + jo.getString("name"));
+                    Log.d("checkerOfString", jo.getString("name") + jo.getString("name"));
 
                     Intent i = new Intent(LoginActivity.this, CodeActivity.class);
                     i.putExtra("mobile", mobileStr);
                     startActivity(i);
                     LoginActivity.this.finish();
                 }
-                if (res.equals("notexist")){
+                if (res.equals("notexist")) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext() , "your phone number isn't exist please login",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "your phone number isn't exist please login", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
 
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
-//
-//                    }
-//                });
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (ClientProtocolException e) {

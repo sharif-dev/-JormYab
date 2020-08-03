@@ -14,7 +14,9 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -22,6 +24,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
     SharedPreferences setting;
     public static View view;
+    CoordinatorLayout crdLayout;
 
 //    @SuppressLint("ResourceType")
 //    @RequiresApi(api = Build.VERSION_CODES.O)
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 //        Snackbar.make(findViewById(R.layout.popup_snackbar), "danger place",
 //                Snackbar.LENGTH_SHORT)
 //                .show();

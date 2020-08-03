@@ -70,9 +70,7 @@ public class AlertDangerService extends Service {
                             vibrator.vibrate(VibrationEffect.createWaveform(timing, strength, -1));
                         }
                         else {
-                            Snackbar.make(view.findViewById(R.layout.popup_snackbar), "danger place",
-                                    Snackbar.LENGTH_SHORT)
-                                    .show();
+                            Toast.makeText(getApplicationContext() , "danger place" , Toast.LENGTH_LONG).show();
                         }
                         //TODO notification
                     }else {
