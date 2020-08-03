@@ -2,6 +2,7 @@ package com.example.jormyab;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -43,6 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
     String mobileStr;
     String emailStr;
     Button signUpBtn;
+    SharedPreferences setting;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +122,7 @@ public class SignUpActivity extends AppCompatActivity {
     public class register_user extends AsyncTask<Void,Void,String>
     {
         ProgressDialog pd = new ProgressDialog(SignUpActivity.this);
-        String url = "http://172.20.10.3/connection.php";
+        String url = "http://192.168.1.52/connection.php";
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -144,7 +147,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 HttpResponse httpResponse = httpClient.execute(httpPost);
                 final String response = EntityUtils.toString(httpResponse.getEntity());
-                JSONObject jo = new JSONObject(response);
+                final JSONObject jo = new JSONObject(response);
                 final String res;
                 res = jo.getString("result");
                 if (res.equals("ok")){
@@ -152,6 +155,17 @@ public class SignUpActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            try {
+                                SharedPreferences.Editor editor = setting.edit();
+                                User user = new User(jo.getString("name") , jo.getString("last_name") , jo.getString("email") , mobileStr);
+                                Gson gson = new Gson();
+                                String json = gson.toJson(user);
+
+                                editor.putString("user" , json);
+                                editor.apply();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
 
                         }

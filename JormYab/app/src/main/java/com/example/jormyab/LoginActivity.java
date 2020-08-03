@@ -1,7 +1,9 @@
 package com.example.jormyab;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -39,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView goToSignUp;
     String mobileStr;
     String name;
+    SharedPreferences setting;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }else {
                     if (!mobile.getText().toString().startsWith("09")){
-                        Toast.makeText(getApplicationContext(), "mobileh should start with 09", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "mobile should start with 09", Toast.LENGTH_LONG).show();
 
                     }else {
                         //TODO
@@ -83,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public class login extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(LoginActivity.this);
-        String url = "http://192.168.1.52/connection.php";
+        String url = "http://192.168.1.53/connection.php";
 
         @Override
         protected void onPreExecute() {
@@ -108,7 +112,8 @@ public class LoginActivity extends AppCompatActivity {
                 final String res;
                 res = jo.getString("result");
                 if (res.equals("ok")) {
-                    //activation key send
+                    Log.d("checkerOfString" , jo.getString("name") + jo.getString("name"));
+
                     Intent i = new Intent(LoginActivity.this, CodeActivity.class);
                     i.putExtra("mobile", mobileStr);
                     startActivity(i);
@@ -122,9 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 }
-//                else {
-//                    Toast.makeText(getApplicationContext() , "connection error",Toast.LENGTH_LONG).show();
-//                }
+
 //                runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {

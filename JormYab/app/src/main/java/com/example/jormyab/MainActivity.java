@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 //        System.out.println("bye");
 //        setting = PreferenceManager.getDefaultSharedPreferences(this);
         if (true) {
-            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+            Intent i = new Intent(MainActivity.this, MenuActivity.class);
             startActivity(i);
             MainActivity.this.finish();
         }

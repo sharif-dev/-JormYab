@@ -81,7 +81,7 @@ public class CodeActivity extends AppCompatActivity {
     public class verify_code extends AsyncTask<Void,Void,String>
     {
         ProgressDialog pd = new ProgressDialog(CodeActivity.this);
-        String url = "http://192.168.1.52/connection.php";
+        String url = "http://192.168.1.53/connection.php";
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -110,6 +110,12 @@ public class CodeActivity extends AppCompatActivity {
                 if (!res.equals("error")){
                     SharedPreferences.Editor editor = setting.edit();
                     editor.putInt("user_id",jo.getInt("user_id"));
+                    editor.putInt("name",jo.getInt("name"));
+
+                    editor.putString("last_name" , jo.getString("last_name"));
+                    editor.putString("email" , jo.getString("email"));
+                    editor.putString("mobile" , mobile);
+
                     editor.commit();
                     runOnUiThread(new Runnable() {
                         @Override
@@ -118,7 +124,7 @@ public class CodeActivity extends AppCompatActivity {
 
                         }
                     });
-                    Intent i = new Intent(CodeActivity.this,MapsActivity.class);
+                    Intent i = new Intent(CodeActivity.this,MenuActivity.class);
                     startActivity(i);
                     CodeActivity.this.finish();
                 }

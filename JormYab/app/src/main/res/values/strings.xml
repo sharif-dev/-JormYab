@@ -24,6 +24,8 @@
     <string name="gmail">jormyab@gmail.com</string>
     <string name="phone_number">09*********</string>
     <string name="todo">TODO</string>
+    <string name="name">name</string>
+    <string name="mobile_number">mobile_number</string>
     <string-array name="crimes">
         <item>motor robbery</item>
         <item>rubbery from house</item>
