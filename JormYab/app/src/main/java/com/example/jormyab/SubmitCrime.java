@@ -42,6 +42,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SubmitCrime extends Fragment {
     private Button location;
@@ -60,6 +61,7 @@ public class SubmitCrime extends Fragment {
     private String monthStr;
     private String yearStr;
     private String crimeStr;
+    private Date date;
     @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -91,10 +93,11 @@ public class SubmitCrime extends Fragment {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("command", "Submit_crime"));
             nameValuePairs.add(new BasicNameValuePair("other", otherStr));
-            nameValuePairs.add(new BasicNameValuePair("hour", hourStr));
-            nameValuePairs.add(new BasicNameValuePair("day", dayStr));
-            nameValuePairs.add(new BasicNameValuePair("month", monthStr));
-            nameValuePairs.add(new BasicNameValuePair("year", yearStr));
+         //   nameValuePairs.add(new BasicNameValuePair("hour", hourStr));
+            //   nameValuePairs.add(new BasicNameValuePair("day", dayStr));
+        //    nameValuePairs.add(new BasicNameValuePair("month", monthStr));
+        //    nameValuePairs.add(new BasicNameValuePair("year", yearStr));
+            nameValuePairs.add(new BasicNameValuePair("date", date.toString()));
             nameValuePairs.add(new BasicNameValuePair("crime", crimeStr));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
@@ -117,7 +120,7 @@ public class SubmitCrime extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity().getApplicationContext(), "your phone number isn't exist please login", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "something go wrong", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
