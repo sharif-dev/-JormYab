@@ -117,7 +117,7 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
 
     public class login extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(thisContext);
-        String url = "http://172.20.10.3/connection.php";
+        String url = "http://172.20.10.3/Crime_db.php";
 
         @Override
         protected void onPreExecute() {
