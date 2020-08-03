@@ -74,16 +74,19 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
         crime.setAdapter(adaptor);
         crime.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
 
+        crimeStr = crime.getSelectedItem().toString();
 
         ArrayAdapter<CharSequence> adaptor2= ArrayAdapter.createFromResource(thisContext, R.array.YY , android.R.layout.simple_spinner_item);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         year.setAdapter(adaptor2);
         year.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
+        yearStr = year.getSelectedItem().toString();
 
         ArrayAdapter<CharSequence> adaptor3= ArrayAdapter.createFromResource(thisContext, R.array.MM , android.R.layout.simple_spinner_item);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         month.setAdapter(adaptor3);
         month.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
+        monthStr = month.getSelectedItem().toString();
 
         ArrayAdapter<CharSequence> adaptor4= ArrayAdapter.createFromResource(thisContext, R.array.DD , android.R.layout.simple_spinner_item);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
