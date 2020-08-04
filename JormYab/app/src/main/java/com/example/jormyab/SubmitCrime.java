@@ -93,6 +93,28 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
         day.setAdapter(adaptor4);
         day.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
         dayStr = day.getSelectedItem().toString();
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (yearStr.length()==0 || monthStr.length()==0 || yearStr.length()==0 || hourStr.length() == 0){
+                    Toast.makeText(thisContext , "Date must not be empty" , Toast.LENGTH_LONG).show();
+                }else{
+                    if (other.getText().toString().length()==0){
+                        Toast.makeText(thisContext , "other must not be empty" , Toast.LENGTH_LONG).show();
+
+                    }
+
+                            else {
+
+
+
+
+                            }
+                        }
+                    }
+
+
+        });
 
 
     }
