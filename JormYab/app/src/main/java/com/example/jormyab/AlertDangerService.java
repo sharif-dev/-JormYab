@@ -45,7 +45,6 @@ public class AlertDangerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        final boolean[] isLocked = new boolean[1];
         final View view = View.inflate(getApplicationContext(), R.layout.activity_main, null);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -57,24 +56,18 @@ public class AlertDangerService extends Service {
                 String s = String.valueOf(location.getLongitude()) + " " + String.valueOf(location.getLatitude());
                 try {
                     boolean response = new Client2().execute(s).get();
-                    if (response){
-                        KeyguardManager myKM = (KeyguardManager) getApplicationContext().getSystemService(Context.KEYGUARD_SERVICE);
-                        assert myKM != null;
-                        isLocked[0] = myKM.inKeyguardRestrictedInputMode();
-
-                        Toast.makeText(getBaseContext(),s, Toast.LENGTH_LONG).show();
-                        if (isLocked[0]) {
+                    if (true){
+//                        Toast.makeText(getBaseContext(),s, Toast.LENGTH_LONG).show();
                             long[] timing = new long[]{500, 500, 500, 200, 500, 500, 500, 500, 500, 200, 500, 500};
                             int[] strength = new int[]{255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0};
                             Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                             vibrator.vibrate(VibrationEffect.createWaveform(timing, strength, -1));
-                        }
-                        else {
+
                             Toast.makeText(getApplicationContext() , "danger place" , Toast.LENGTH_LONG).show();
-                        }
+
                         //TODO notification
                     }else {
-                        Toast.makeText(getBaseContext(),"OK", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getBaseContext(),"OK", Toast.LENGTH_LONG).show();
                     }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
