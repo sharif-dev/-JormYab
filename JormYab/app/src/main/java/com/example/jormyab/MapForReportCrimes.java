@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -30,12 +31,14 @@ import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.Date;
 import java.util.Formatter;
 import java.util.Scanner;
 
 public class MapForReportCrimes extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    SharedPreferences sharedPreferences;
     LatLng target;
     boolean flag = false;
 
@@ -47,6 +50,7 @@ public class MapForReportCrimes extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        sharedPreferences = getSharedPreferences("report", MODE_PRIVATE);
     }
 
 
@@ -60,6 +64,11 @@ public class MapForReportCrimes extends FragmentActivity implements OnMapReadyCa
             @Override
             public void onMapClick(LatLng latLng) {
                 target=latLng;
+                SharedPreferences.Editor editor= sharedPreferences.edit();
+                editor.putString("longitude", String.valueOf(target.longitude));
+                editor.putString("latitude", String.valueOf(target.latitude));
+                Toast.makeText(getBaseContext(), sharedPreferences.getString("longitude", ""), Toast.LENGTH_LONG).show();
+                editor.commit();
                 finish();
             }
         });
@@ -87,8 +96,9 @@ public class MapForReportCrimes extends FragmentActivity implements OnMapReadyCa
 
     }
 
+    @Override
+    protected void onStop() {
 
-
-
-
+        super.onStop();
+    }
 }
