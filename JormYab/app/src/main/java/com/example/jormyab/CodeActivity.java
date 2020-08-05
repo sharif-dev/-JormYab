@@ -70,7 +70,7 @@ public class CodeActivity extends AppCompatActivity {
 
     public class verify_code extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(CodeActivity.this);
-        String url = "http://192.168.1.53/connection.php";
+        String url = "http://192.168.1.35/connection.php";
 
         @Override
         protected void onPreExecute() {

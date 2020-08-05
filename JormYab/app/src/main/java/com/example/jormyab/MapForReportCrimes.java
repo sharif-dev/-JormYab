@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
 
 import android.Manifest;
 import android.content.Context;
@@ -50,7 +51,7 @@ public class MapForReportCrimes extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        sharedPreferences = getSharedPreferences("report", MODE_PRIVATE);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
     }
 
 
@@ -67,8 +68,13 @@ public class MapForReportCrimes extends FragmentActivity implements OnMapReadyCa
                 SharedPreferences.Editor editor= sharedPreferences.edit();
                 editor.putString("longitude", String.valueOf(target.longitude));
                 editor.putString("latitude", String.valueOf(target.latitude));
-                Toast.makeText(getBaseContext(), sharedPreferences.getString("longitude", ""), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getBaseContext(), sharedPreferences.getString("longitude", ""), Toast.LENGTH_LONG).show();
                 editor.commit();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 finish();
             }
         });

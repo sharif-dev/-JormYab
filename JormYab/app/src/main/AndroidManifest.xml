@@ -31,6 +31,7 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".CodeActivity"/>
         <activity android:name=".MapsActivity"/>
+        <activity android:name=".SubmitCrime" />
         <activity android:name=".MapForReportCrimes"/>
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".MenuActivity"/>

@@ -1,5 +1,7 @@
 package com.example.jormyab;
+
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +29,9 @@ import android.widget.Toast;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -50,19 +55,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelectedListener {
+public class SubmitCrime extends Activity implements AdapterView.OnItemSelectedListener {
     private Button location;
     private Button submit;
     private TextView welcome;
-    private double longitude;
-    private double latitude;
-   // private Spinner hour;
-   // private Spinner day;
-   // private Spinner month;
-  //  private Spinner year;
+    private TextView longitude;
+    private TextView latitude;
+
     private Spinner crime;
-    private TextInputEditText other;
-    private Context thisContext;
     private String otherStr;
     private int hour1;
     private int day1;
@@ -72,85 +72,76 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
     private Date date;
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListner;
-    private String dateStr;
+    private String dateStr = "";
     private int crimeInt;
+    private SharedPreferences sharedPreferences;
 
-    @Nullable
+
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        findViews(view);
-        ArrayAdapter<CharSequence> adaptor= ArrayAdapter.createFromResource(thisContext, R.array.crimes , android.R.layout.simple_spinner_item);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.submit_crime);
+        findViews();
+        viewProcess();
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+
+    public void viewProcess() {
+
+        ArrayAdapter<CharSequence> adaptor = ArrayAdapter.createFromResource(this, R.array.crimes, android.R.layout.simple_spinner_item);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         crime.setAdapter(adaptor);
-        crime.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
+        crime.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SubmitCrime.this, MapForReportCrimes.class);
+                startActivity(i);
+            }
+        });
 
         crimeStr = crime.getSelectedItem().toString();
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
-                 year1 = cal.get(Calendar.YEAR);
-                 month1 = cal.get(Calendar.MONTH);
-                 day1 = cal.get(Calendar.DAY_OF_MONTH);
-                 //hour1 = cal.get(Calendar.HOUR_OF_DAY);
-                 DatePickerDialog dialog = new DatePickerDialog(thisContext , android.R.style.Widget_Holo_ActionBar_Solid , mDateSetListner, year1 , month1 , day1);
-                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                 dialog.show();
-
-
+                year1 = cal.get(Calendar.YEAR);
+                month1 = cal.get(Calendar.MONTH);
+                day1 = cal.get(Calendar.DAY_OF_MONTH);
+                //hour1 = cal.get(Calendar.HOUR_OF_DAY);
+                DatePickerDialog dialog = new DatePickerDialog(SubmitCrime.this, android.R.style.Theme_Dialog, mDateSetListner, year1, month1, day1);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
 
 
             }
         });
+        date = new Date();
         mDateSetListner = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 date.setYear(year);
                 date.setMonth(month);
                 date.setDate(dayOfMonth);
-                month = month+1;
+                month = month + 1;
                 dateStr = year + "/" + month + "/" + dayOfMonth;
                 mDisplayDate.setText(dateStr);
 
             }
         };
-//        ArrayAdapter<CharSequence> adaptor2= ArrayAdapter.createFromResource(thisContext, R.array.YY , android.R.layout.simple_spinner_item);
-//        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        year.setAdapter(adaptor2);
-//        year.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
-//        yearStr = year.getSelectedItem().toString();
-//
-//        ArrayAdapter<CharSequence> adaptor3= ArrayAdapter.createFromResource(thisContext, R.array.MM , android.R.layout.simple_spinner_item);
-//        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        month.setAdapter(adaptor3);
-//        month.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
-//        monthStr = month.getSelectedItem().toString();
-//
-//        ArrayAdapter<CharSequence> adaptor4= ArrayAdapter.createFromResource(thisContext, R.array.DD , android.R.layout.simple_spinner_item);
-//        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        day.setAdapter(adaptor4);
-//        day.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) thisContext);
-//        dayStr = day.getSelectedItem().toString();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dateStr.length() == 0){
-                    Toast.makeText(thisContext , "Date must not be empty" , Toast.LENGTH_LONG).show();
-                }else{
-                    if (other.getText().toString().length()==0){
-                        Toast.makeText(thisContext , "other must not be empty" , Toast.LENGTH_LONG).show();
+                if (dateStr.length() == 0) {
+                    Toast.makeText(SubmitCrime.this, "Date must not be empty", Toast.LENGTH_LONG).show();
+                } else {
+                    new addDataToDAtaBase().execute();
 
-                    }
-
-                            else if(crimeStr.length() ==0) {
-
-                                        Toast.makeText(thisContext , "crime must not be empty" , Toast.LENGTH_LONG).show();
-
-
-                            }
-                        }
-                    }
+                }
+            }
 
 
         });
@@ -158,25 +149,24 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
 
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        thisContext= container.getContext();
-        return inflater.inflate(R.layout.submit_crime, container, false);
-
-
+    @Override
+    protected void onRestart() {
+        longitude.setText(sharedPreferences.getString("longitude", ""));
+        latitude.setText(sharedPreferences.getString("latitude", ""));
+        super.onRestart();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         crimeStr = (String) parent.getItemAtPosition(position);
-        if(crimeStr.equals("motor robbery")){
-            crimeInt=1;
-
-        }else if(crimeStr.equals(("rubbery from house"))){
-            crimeInt=2;
-        }else if(crimeStr.equals(("murder"))){
-            crimeInt=3;
-        }else {
-            crimeInt=4;
+        if (crimeStr.equals("motor robbery")) {
+            crimeInt = 1;
+        } else if (crimeStr.equals(("rubbery from house"))) {
+            crimeInt = 2;
+        } else if (crimeStr.equals(("murder"))) {
+            crimeInt = 3;
+        } else {
+            crimeInt = 4;
         }
 
 
@@ -187,9 +177,9 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
 
     }
 
-    public class login extends AsyncTask<Void, Void, String> {
-        ProgressDialog pd = new ProgressDialog(thisContext);
-        String url = "http://172.20.10.3/Crime_db.php";
+    public class addDataToDAtaBase extends AsyncTask<Void, Void, String> {
+        ProgressDialog pd = new ProgressDialog(SubmitCrime.this);
+        String url = "http://192.168.43.28/addData.php";
 
         @Override
         protected void onPreExecute() {
@@ -201,14 +191,12 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
         @Override
         protected String doInBackground(Void... voids) {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("command", "Submit_crime"));
-            nameValuePairs.add(new BasicNameValuePair("other", otherStr));
-         //   nameValuePairs.add(new BasicNameValuePair("hour", hourStr));
-            //   nameValuePairs.add(new BasicNameValuePair("day", dayStr));
-        //    nameValuePairs.add(new BasicNameValuePair("month", monthStr));
-        //    nameValuePairs.add(new BasicNameValuePair("year", yearStr));
-            nameValuePairs.add(new BasicNameValuePair("date", date.toString()));
-            nameValuePairs.add(new BasicNameValuePair("crime", String.valueOf(crimeInt)));
+            nameValuePairs.add(new BasicNameValuePair("command", "add_data"));
+            nameValuePairs.add(new BasicNameValuePair("user_id", String.valueOf(sharedPreferences.getInt("user_id", 0))));
+            nameValuePairs.add(new BasicNameValuePair("longitude", longitude.getText().toString()));
+            nameValuePairs.add(new BasicNameValuePair("latitude", latitude.getText().toString()));
+//            nameValuePairs.add(new BasicNameValuePair("date", date.toString()));
+            nameValuePairs.add(new BasicNameValuePair("kind", String.valueOf(crimeInt)));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             try {
@@ -221,29 +209,17 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
                 res = jo.getString("result");
                 if (res.equals("ok")) {
                     //activation key send
-                    Intent i = new Intent(thisContext, CodeActivity.class);
-                    i.putExtra("other", otherStr);
-                    startActivity(i);
-                    getActivity().finish();
-                }
-                if (res.equals("notexist")) {
-                    getActivity().runOnUiThread(new Runnable() {
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity().getApplicationContext(), "something go wrong", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SubmitCrime.this, "violence reported", Toast.LENGTH_SHORT).show();
                         }
                     });
+                    Intent i = new Intent(SubmitCrime.this, MenuActivity.class);
+                    startActivity(i);
+                    finish();
                 }
-//                else {
-//                    Toast.makeText(getApplicationContext() , "connection error",Toast.LENGTH_LONG).show();
-//                }
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
-//
-//                    }
-//                });
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (ClientProtocolException e) {
@@ -255,19 +231,18 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
             }
             return null;
         }
+
     }
 
-        public void findViews(View view) {
-        Log.d("taatat", " i am in find view");
-//        hour= view.findViewById(R.id.spinner2);
-//        day = view.findViewById(R.id.spinner3);
-//        month = view.findViewById(R.id.spinner4);
-//        year = view.findViewById(R.id.spinner5);
-        crime =view.findViewById(R.id.spinner1);
-        mDisplayDate = view.findViewById(R.id.select_date);
-        submit = view.findViewById(R.id.submit_btn_crrime);
-        location = view.findViewById(R.id.location_btn_crime);
-        welcome = view.findViewById(R.id.welcome_crime);
-        other = view.findViewById(R.id.text_input_layout_other);
+    public void findViews() {
+        longitude = findViewById(R.id.longitude);
+        latitude = findViewById(R.id.latitude);
+
+        crime = findViewById(R.id.spinner1);
+        mDisplayDate = findViewById(R.id.select_date);
+        submit = findViewById(R.id.submit_btn_crrime);
+        location = findViewById(R.id.location_btn_crime);
+        welcome = findViewById(R.id.welcome_crime);
+
     }
 }

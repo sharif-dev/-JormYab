@@ -7,26 +7,57 @@
     android:background="@drawable/bg1">
 
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="48dp"
+        android:layout_height="38dp"
+        android:text="Y="
+        android:gravity="center"
+        tools:layout_editor_absoluteX="183dp"
+        tools:layout_editor_absoluteY="127dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="47dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:text=""
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        tools:layout_editor_absoluteY="123dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="47dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:text=""
+        app:layout_constraintEnd_toStartOf="@+id/location_btn_crime"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        tools:layout_editor_absoluteY="123dp"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/location_btn_crime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="86dp"
+        android:layout_height="53dp"
 
         android:background="@drawable/bg_button_white"
         android:gravity="center"
-        android:text="Location"
+        android:text="map"
         android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="188dp" />
+        tools:layout_editor_absoluteY="118dp" />
 
     <TextView
         android:id="@+id/welcome_crime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="96dp"
-        android:layout_marginRight="136dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="124dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
@@ -61,61 +92,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <!--   <Spinner-->
-<!--        android:id="@+id/spinner2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity=""-->
-
-<!--        android:layout_marginTop="352dp"-->
-<!--        android:layout_marginRight="256dp"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <Spinner-->
-<!--        android:id="@+id/spinner3"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_horizontal"-->
-
-<!--        android:layout_marginTop="352dp"-->
-<!--        android:layout_marginRight="208dp"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <Spinner-->
-<!--        android:id="@+id/spinner4"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_horizontal"-->
-
-<!--        android:layout_marginTop="352dp"-->
-<!--        android:layout_marginRight="160dp"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <Spinner-->
-<!--        android:id="@+id/spinner5"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_horizontal"-->
-
-<!--        android:layout_marginTop="352dp"-->
-<!--        android:layout_marginRight="112dp"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />*/-->
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout_other"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/myEditTextStyle"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="431dp">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/submit_btn_crrime"
         android:layout_width="wrap_content"
@@ -130,7 +106,26 @@
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="487dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="52dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="location"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="127dp"
+        tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="48dp"
+        android:layout_height="38dp"
+        android:text="X="
+        android:gravity="center"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="127dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,18 +56,15 @@ public class AlertDangerService extends Service {
                 String s = String.valueOf(location.getLongitude()) + " " + String.valueOf(location.getLatitude());
                 try {
                     boolean response = new Client2().execute(s).get();
-                    if (true){
-//                        Toast.makeText(getBaseContext(),s, Toast.LENGTH_LONG).show();
-                            long[] timing = new long[]{500, 500, 500, 200, 500, 500, 500, 500, 500, 200, 500, 500};
-                            int[] strength = new int[]{255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0};
-                            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                            vibrator.vibrate(VibrationEffect.createWaveform(timing, strength, -1));
+                    if (true) {
+                        long[] timing = new long[]{500, 500, 500, 200, 500, 500, 500, 500, 500, 200, 500, 500};
+                        int[] strength = new int[]{255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0};
+                        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(VibrationEffect.createWaveform(timing, strength, -1));
 
-                            Toast.makeText(getApplicationContext() , "danger place" , Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "danger place", Toast.LENGTH_LONG).show();
 
                         //TODO notification
-                    }else {
-//                        Toast.makeText(getBaseContext(),"OK", Toast.LENGTH_LONG).show();
                     }
                 } catch (ExecutionException e) {
                     e.printStackTrace();

@@ -26,36 +26,21 @@ public class MainActivity extends AppCompatActivity {
     public static View view;
     CoordinatorLayout crdLayout;
 
-//    @SuppressLint("ResourceType")
+    //    @SuppressLint("ResourceType")
 //    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        Intent service = new Intent(this, AlertDangerService.class);
+//        startService(service);
+//
 
-//        Snackbar.make(findViewById(R.layout.popup_snackbar), "danger place",
-//                Snackbar.LENGTH_SHORT)
-//                .show();
-//        long[] timing = new long[]{700, 500, 200, 40, 700, 500, 200, 50, 200, 50, 200, 50,200,50,200,50,700,50};
-//        int[] strength = new int[]{255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0,255,0,255,0,255,0};
-//        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-//        vibrator.vibrate(VibrationEffect.createWaveform(timing, strength, -1));
-//        Intent i = new Intent(this, AlertDangerService.class);
-//        System.out.println("hi");
-//        startService(i);
-//        System.out.println("bye");
-//        setting = PreferenceManager.getDefaultSharedPreferences(this);
-        if (true) {
-            Intent i = new Intent(MainActivity.this, MenuActivity.class);
-            startActivity(i);
-            MainActivity.this.finish();
-        }
-        else {
-//            ProfileActivity profileActivity = new ProfileActivity();
-//            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container , profileActivity).addToBackStack(null).commit();
-            SubmitCrimeFragment submitCrimeFragment = new SubmitCrimeFragment(this);
-            submitCrimeFragment.show();
-        }
+        Intent i = new Intent(MainActivity.this, MenuActivity.class);
+        startActivity(i);
+        MainActivity.this.finish();
+
+
     }
 }

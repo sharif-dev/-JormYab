@@ -1,9 +1,11 @@
 package com.example.jormyab;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,11 +30,23 @@ public class MenuActivity extends AppCompatActivity {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MenuActivity.this , MapsActivity.class);
+                Intent i = new Intent(MenuActivity.this , MapForReportCrimes.class);
                 startActivity(i);
             }
         });
+
+        reportCrime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuActivity.this, SubmitCrime.class);
+                startActivity(i);
+            }
+        });
+
     }
+
+
+
 
     private void findViews(){
         profile = findViewById(R.id.profile_image);
