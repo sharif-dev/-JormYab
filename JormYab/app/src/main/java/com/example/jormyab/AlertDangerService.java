@@ -26,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 
@@ -49,6 +50,8 @@ public class AlertDangerService extends Service {
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
+            Date date = new Date();
+            
             @SuppressLint("ResourceType")
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override

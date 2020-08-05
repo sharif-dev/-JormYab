@@ -26,6 +26,7 @@
     <string name="todo">TODO</string>
     <string name="name">name</string>
     <string name="mobile_number">mobile_number</string>
+    <string name="report_crime">report crime</string>
     <string-array name="crimes">
         <item>motor robbery</item>
         <item>rubbery from house</item>

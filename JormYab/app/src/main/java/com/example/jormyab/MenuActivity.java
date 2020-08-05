@@ -38,6 +38,7 @@ public class MenuActivity extends AppCompatActivity {
         reportCrime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(MenuActivity.this, SubmitCrime.class);
                 startActivity(i);
             }
