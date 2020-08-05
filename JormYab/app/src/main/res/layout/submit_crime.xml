@@ -45,49 +45,65 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity=""
-
-        android:layout_marginTop="352dp"
-        android:layout_marginRight="256dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinner3"
+    <TextView
+        android:id="@+id/select_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-
-        android:layout_marginTop="352dp"
-        android:layout_marginRight="208dp"
+        android:layout_marginTop="328dp"
+        android:layout_marginRight="148dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="select Date"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
 
-        android:layout_marginTop="352dp"
-        android:layout_marginRight="160dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--   <Spinner-->
+<!--        android:id="@+id/spinner2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity=""-->
 
-    <Spinner
-        android:id="@+id/spinner5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+<!--        android:layout_marginTop="352dp"-->
+<!--        android:layout_marginRight="256dp"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-        android:layout_marginTop="352dp"
-        android:layout_marginRight="112dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+
+<!--        android:layout_marginTop="352dp"-->
+<!--        android:layout_marginRight="208dp"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+
+<!--        android:layout_marginTop="352dp"-->
+<!--        android:layout_marginRight="160dp"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner5"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+
+<!--        android:layout_marginTop="352dp"-->
+<!--        android:layout_marginRight="112dp"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />*/-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_layout_other"
