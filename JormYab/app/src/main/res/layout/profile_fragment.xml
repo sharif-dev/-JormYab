@@ -196,6 +196,12 @@
                     android:layout_marginTop="15dp"
                     android:background="@color/grey" />
 
+                <Button
+                    android:id="@+id/exit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="exit" />
+
             </LinearLayout>
 
 

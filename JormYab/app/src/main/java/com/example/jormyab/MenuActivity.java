@@ -30,7 +30,7 @@ public class MenuActivity extends AppCompatActivity {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MenuActivity.this , MapForReportCrimes.class);
+                Intent i = new Intent(MenuActivity.this , MapsActivity.class);
                 startActivity(i);
             }
         });

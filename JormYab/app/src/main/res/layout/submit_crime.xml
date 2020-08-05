@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/subcrime_background">
+    android:background="@drawable/subcrime_background"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/welcome_crime"
         android:layout_width="wrap_content"
@@ -24,73 +25,78 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingTop="40dp"
         android:layout_margin="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="40dp">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
-            android:textColor="@color/white"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="location"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="127dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="127dp" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
-            android:text="X="
+            android:layout_weight="1"
             android:gravity="center"
+            android:text="X="
+            android:textColor="@color/white"
+            tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="83dp"
-            tools:layout_editor_absoluteY="127dp"
-            tools:ignore="MissingConstraints" />
+            tools:layout_editor_absoluteY="127dp" />
 
         <TextView
             android:id="@+id/longitude"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:ems="10"
             android:text=""
+            android:textColor="@color/white"
 
             app:layout_constraintEnd_toStartOf="@+id/textView3"
-            tools:layout_editor_absoluteY="123dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="123dp" />
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
-            android:text="Y="
+            android:layout_weight="1"
             android:gravity="center"
+            android:text="Y="
+            android:textColor="@color/white"
 
             tools:ignore="MissingConstraints" />
+
         <TextView
             android:id="@+id/latitude"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+
             android:ems="10"
             android:text=""
+            android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/location_btn_crime"
             app:layout_constraintStart_toEndOf="@+id/textView3"
-            tools:layout_editor_absoluteY="123dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="123dp" />
+
         <Button
             android:id="@+id/location_btn_crime"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
 
             android:background="@drawable/bg_button_white"
             android:gravity="center"
@@ -102,8 +108,6 @@
 
 
     </LinearLayout>
-
-
 
 
     <TextView
@@ -121,19 +125,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
-
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp"
-        android:padding="30dp"
- />
-
-
+        android:padding="30dp" />
 
 
     <Button
@@ -146,10 +144,6 @@
         android:text="SUBMIT"
         android:textColor="@color/white"
         tools:ignore="MissingConstraints" />
-
-
-
-
 
 
 </LinearLayout>

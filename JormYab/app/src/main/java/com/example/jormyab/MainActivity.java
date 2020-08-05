@@ -25,22 +25,36 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences setting;
     public static View view;
     CoordinatorLayout crdLayout;
+    SharedPreferences sharedPreferences;
 
     //    @SuppressLint("ResourceType")
 //    @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Intent service = new Intent(this, AlertDangerService.class);
-//        startService(service);
-//
+        Intent i ;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPreferences.getInt("user_id", 0) == 0){
+            i = new Intent(MainActivity.this, LoginActivity.class);
 
-        Intent i = new Intent(MainActivity.this, MenuActivity.class);
+        }else {
+            i = new Intent(MainActivity.this, MenuActivity.class);
+
+        }
+
+
         startActivity(i);
         MainActivity.this.finish();
 
 
+//        Intent service = new Intent(this, AlertDangerService.class);
+//        startService(service);
+
+
     }
+
+
 }

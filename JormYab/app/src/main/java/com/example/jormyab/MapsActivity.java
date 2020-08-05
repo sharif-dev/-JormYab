@@ -84,7 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     } else if (mMap.getCameraPosition().zoom < 13.5) {
                         command += "2 ";
 
-                    } else if (mMap.getCameraPosition().zoom < 15) {
+                    } else if (mMap.getCameraPosition().zoom < 14.5) {
                         command += "3 ";
                     } else {
                         command += "4 ";

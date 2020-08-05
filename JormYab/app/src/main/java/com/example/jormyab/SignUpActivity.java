@@ -122,7 +122,7 @@ public class SignUpActivity extends AppCompatActivity {
     public class register_user extends AsyncTask<Void,Void,String>
     {
         ProgressDialog pd = new ProgressDialog(SignUpActivity.this);
-        String url = "http://192.168.1.52/connection.php";
+        String url = "http://192.168.43.28/connection.php";
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

@@ -89,12 +89,25 @@ public class SubmitCrime extends Activity implements AdapterView.OnItemSelectedL
     }
 
 
+
     public void viewProcess() {
 
         ArrayAdapter<CharSequence> adaptor = ArrayAdapter.createFromResource(this, R.array.crimes, android.R.layout.simple_spinner_item);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         crime.setAdapter(adaptor);
-        crime.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+//        crime.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        crime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
 
         location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +141,7 @@ public class SubmitCrime extends Activity implements AdapterView.OnItemSelectedL
                 date.setMonth(month);
                 date.setDate(dayOfMonth);
                 month = month + 1;
-                dateStr = year + "/" + month + "/" + dayOfMonth;
+                dateStr = year + "-" + month + "-" + dayOfMonth;
                 mDisplayDate.setText(dateStr);
 
             }
@@ -198,7 +211,7 @@ public class SubmitCrime extends Activity implements AdapterView.OnItemSelectedL
             nameValuePairs.add(new BasicNameValuePair("user_id", String.valueOf(sharedPreferences.getInt("user_id", 0))));
             nameValuePairs.add(new BasicNameValuePair("longitude", longitudeString));
             nameValuePairs.add(new BasicNameValuePair("latitude", latitudeString));
-//            nameValuePairs.add(new BasicNameValuePair("date", date.toString()));
+            nameValuePairs.add(new BasicNameValuePair("date", dateStr));
             nameValuePairs.add(new BasicNameValuePair("kind", String.valueOf(crimeInt)));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);

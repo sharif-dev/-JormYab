@@ -45,6 +45,11 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences setting;
 
     @Override
+    public void onBackPressed() {
+        System.exit(0);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
@@ -87,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public class login extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(LoginActivity.this);
-        String url = "http://192.168.1.53/connection.php";
+        String url = "http://192.168.43.28/connection.php";
 
         @Override
         protected void onPreExecute() {
@@ -146,5 +151,7 @@ public class LoginActivity extends AppCompatActivity {
             pd.dismiss();
             super.onPostExecute(s);
         }
+
+
     }
 }

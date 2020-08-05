@@ -70,7 +70,7 @@ public class CodeActivity extends AppCompatActivity {
 
     public class verify_code extends AsyncTask<Void, Void, String> {
         ProgressDialog pd = new ProgressDialog(CodeActivity.this);
-        String url = "http://192.168.1.35/connection.php";
+        String url = "http://192.168.43.28/connection.php";
 
         @Override
         protected void onPreExecute() {
@@ -94,19 +94,26 @@ public class CodeActivity extends AppCompatActivity {
 
                 HttpResponse httpResponse = httpClient.execute(httpPost);
                 final String response = EntityUtils.toString(httpResponse.getEntity());
+
                 JSONObject jo = new JSONObject(response);
                 final String res;
                 res = jo.getString("result");
+
                 if (!res.equals("error")) {
                     SharedPreferences.Editor editor = setting.edit();
                     editor.putInt("user_id", jo.getInt("user_id"));
-                    editor.putInt("name", jo.getInt("name"));
+                    editor.putString("name", jo.getString("name"));
 
                     editor.putString("last_name", jo.getString("last_name"));
                     editor.putString("email", jo.getString("email"));
                     editor.putString("mobile", mobile);
-
                     editor.commit();
+
+                    Intent i = new Intent(CodeActivity.this, MenuActivity.class);
+                    startActivity(i);
+                    CodeActivity.this.finish();
+
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -114,9 +121,7 @@ public class CodeActivity extends AppCompatActivity {
 
                         }
                     });
-                    Intent i = new Intent(CodeActivity.this, MenuActivity.class);
-                    startActivity(i);
-                    CodeActivity.this.finish();
+
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
