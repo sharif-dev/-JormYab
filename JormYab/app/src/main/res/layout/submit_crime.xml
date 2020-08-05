@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg1">
+    android:background="@drawable/subcrime_background">
     <TextView
         android:id="@+id/welcome_crime"
         android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
             android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="not set"
+            android:text=""
 
             app:layout_constraintEnd_toStartOf="@+id/textView3"
             tools:layout_editor_absoluteY="123dp"
@@ -81,7 +81,7 @@
 
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="not set"
+            android:text=""
             app:layout_constraintEnd_toStartOf="@+id/location_btn_crime"
             app:layout_constraintStart_toEndOf="@+id/textView3"
             tools:layout_editor_absoluteY="123dp"
@@ -130,7 +130,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp"
-
         android:padding="30dp"
  />
 

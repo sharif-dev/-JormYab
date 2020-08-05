@@ -61,7 +61,8 @@ public class SubmitCrime extends Activity implements AdapterView.OnItemSelectedL
     private TextView welcome;
     private TextView longitude;
     private TextView latitude;
-
+    private String longitudeString = "";
+    private String latitudeString = "";
     private Spinner crime;
     private String otherStr;
     private int hour1;
@@ -151,8 +152,10 @@ public class SubmitCrime extends Activity implements AdapterView.OnItemSelectedL
 
     @Override
     protected void onRestart() {
-        longitude.setText(sharedPreferences.getString("longitude", ""));
-        latitude.setText(sharedPreferences.getString("latitude", ""));
+        longitudeString = sharedPreferences.getString("longitude", "");
+        latitudeString = sharedPreferences.getString("latitude", "");
+        longitude.setText(longitudeString.substring(0, 7));
+        latitude.setText(latitudeString.substring(0, 7));
         super.onRestart();
     }
 
@@ -193,15 +196,14 @@ public class SubmitCrime extends Activity implements AdapterView.OnItemSelectedL
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("command", "add_data"));
             nameValuePairs.add(new BasicNameValuePair("user_id", String.valueOf(sharedPreferences.getInt("user_id", 0))));
-            nameValuePairs.add(new BasicNameValuePair("longitude", longitude.getText().toString()));
-            nameValuePairs.add(new BasicNameValuePair("latitude", latitude.getText().toString()));
+            nameValuePairs.add(new BasicNameValuePair("longitude", longitudeString));
+            nameValuePairs.add(new BasicNameValuePair("latitude", latitudeString));
 //            nameValuePairs.add(new BasicNameValuePair("date", date.toString()));
             nameValuePairs.add(new BasicNameValuePair("kind", String.valueOf(crimeInt)));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             try {
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
-
                 HttpResponse httpResponse = httpClient.execute(httpPost);
                 final String response = EntityUtils.toString(httpResponse.getEntity());
                 JSONObject jo = new JSONObject(response);
