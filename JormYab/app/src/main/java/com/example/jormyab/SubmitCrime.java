@@ -54,6 +54,8 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
     private Button location;
     private Button submit;
     private TextView welcome;
+    private double longitude;
+    private double latitude;
    // private Spinner hour;
    // private Spinner day;
    // private Spinner month;
@@ -71,6 +73,7 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListner;
     private String dateStr;
+    private int crimeInt;
 
     @Nullable
     @Override
@@ -140,9 +143,9 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
 
                     }
 
-                            else {
+                            else if(crimeStr.length() ==0) {
 
-
+                                        Toast.makeText(thisContext , "crime must not be empty" , Toast.LENGTH_LONG).show();
 
 
                             }
@@ -164,6 +167,17 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        crimeStr = (String) parent.getItemAtPosition(position);
+        if(crimeStr.equals("motor robbery")){
+            crimeInt=1;
+
+        }else if(crimeStr.equals(("rubbery from house"))){
+            crimeInt=2;
+        }else if(crimeStr.equals(("murder"))){
+            crimeInt=3;
+        }else {
+            crimeInt=4;
+        }
 
 
     }
@@ -194,7 +208,7 @@ public class SubmitCrime extends Fragment  implements AdapterView.OnItemSelected
         //    nameValuePairs.add(new BasicNameValuePair("month", monthStr));
         //    nameValuePairs.add(new BasicNameValuePair("year", yearStr));
             nameValuePairs.add(new BasicNameValuePair("date", date.toString()));
-            nameValuePairs.add(new BasicNameValuePair("crime", crimeStr));
+            nameValuePairs.add(new BasicNameValuePair("crime", String.valueOf(crimeInt)));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             try {
